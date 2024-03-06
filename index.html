@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webgl2兼容性支持在线测试页</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <script src="./js/twgl-full.min.js"></script>
+    <script src="./js/cube.js"></script>
+    <script src="./js/index.js"></script>
+
+    <div id="wrapper">
+      <div id="support">
+        <div class="webgl-hidden" id="have-javascript">
+          <div class="webgl-hidden webgl-div" id="webgl-yes">
+            <h1 class="good">Your browser supports WebGL2</h1>
+
+            <div>You should see a spinning cube.</div>
+
+            <div id="logo-container">
+              <canvas id="webgl-logo" style="width: 140px; height: 150px" />
+            </div>
+          </div>
+
+          <div class="webgl-hidden webgl-div" id="webgl-disabled">
+            <p>
+              Hmm. While your browser seems to support WebGL2, it is disabled or
+              unavailable. If possible, please ensure that you are running the
+              latest drivers for your video card.
+            </p>
+            <p id="known-browser" class="webgl-hidden">
+              <a id="troubleshooting-link" href=""
+                >For more help, please click this link</a
+              >.
+            </p>
+            <p id="unknown-browser">
+              For more help, please visit the support site for your browser.
+            </p>
+          </div>
+
+          <div class="webgl-hidden webgl-div" id="webgl-no">
+            <p>
+              Oh no! We are sorry, but your browser does not seem to support
+              WebGL2.
+            </p>
+            <div id="upgrade-browser">
+              <p>
+                <a id="upgrade-link" href=""
+                  >You can upgrade <span id="name"></span> by clicking this
+                  link.</a
+                >
+              </p>
+            </div>
+            <div id="get-browser" class="webgl-hidden">
+              <p>
+                You may want to download one of the following browsers to view
+                WebGL2 content.
+              </p>
+
+              <p>
+                The following browsers support WebGL2 on
+                <span id="platform"></span>:
+              </p>
+
+              <div id="webgl-browser-list"></div>
+            </div>
+          </div>
+        </div>
+        <div id="no-javascript">You must enable JavaScript to use WebGL2.</div>
+      </div>
+    </div>
+    <script id="vs" type="text/something-not-javascript">
+      #version 300 es
+      uniform mat4 u_matrix;
+      in vec4 position;
+      in vec2 texcoord;
+      out vec2 v_texcoord;
+      void main() {
+        gl_Position = (u_matrix * position);
+        v_texcoord = texcoord;
+      }
+    </script>
+    <script id="fs" type="text/something-not-javascript">
+      #version 300 es
+      precision mediump float;
+      in vec2 v_texcoord;
+      uniform sampler2D u_texture;
+      out vec4 outColor;
+      void main() {
+        outColor = texture(u_texture, v_texcoord);
+      }
+    </script>
+
+    <!-- NO-BEAUTIFY -->
+  </body>
+</html>
